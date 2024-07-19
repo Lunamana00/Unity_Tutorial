@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Car : MonoBehaviour
+public class CharacterMovement2D : MonoBehaviour
 {
-    [SerializeField] float move_speed = 10f;
-    [SerializeField] float rotate_speed = 1f;
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    public float moveSpeed = 5f;
+    public float rotationSpeed = 5000f;
+    public float boostSpeed = 10f;
     void Update()
     {
-        float Horizontal_input = (Input.GetAxis("Horizontal"))* move_speed * Time.deltaTime;
-        float Vertical_input = (Input.GetAxis("Vertical")) * move_speed * Time.deltaTime;
-        //float D_input = (Input.GetAxis("A")) * rotate_speed * Time.deltaTime;
-       // float A_input = (Input.GetAxis("D")) * rotate_speed * Time.deltaTime;
-        //transform.Rotate(0, D_input, 0);
-        //transform.Rotate(0, -A_input, 0);
-        transform.Translate(Horizontal_input, Vertical_input, 0);
+        // Get the input for movement and rotation
+        float moveInput = Input.GetAxis("Vertical");
+        float rotationInput = Input.GetAxis("Horizontal");
+
+        transform.Translate(0, moveInput * moveSpeed * Time.deltaTime, 0);
+ 
+        transform.Rotate(0, 0, -rotationInput * rotationSpeed * Time.deltaTime);
+
     }
+
+    private void OnTriggerEnter2D(Collider2D others)
+    {
+        if(others.tag == "Boost")
+        {
+            moveSpeed = boostSpeed;
+        }
+    }
+
 }
