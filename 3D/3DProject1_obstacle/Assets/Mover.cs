@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    float speed;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        speed = 0.01f;
+
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        transform.Translate(speed, speed, speed);
+    {
+        float xvalue = Input.GetAxis("Horizontal")*0.1f;
+        float zvalue = Input.GetAxis("Vertical")*0.1f;
+        transform.Translate(xvalue,0,zvalue);
     }
 }
