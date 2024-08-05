@@ -5,18 +5,18 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
 
-
+    [SerializeField] float movespeed = 2f;
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        float xvalue = Input.GetAxis("Horizontal")*0.1f;
-        float zvalue = Input.GetAxis("Vertical")*0.1f;
+        float xvalue = Input.GetAxis("Horizontal")* movespeed * Time.deltaTime;
+        float zvalue = Input.GetAxis("Vertical")* movespeed * Time.deltaTime;
         transform.Translate(xvalue,0,zvalue);
     }
 }
